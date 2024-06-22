@@ -30,6 +30,10 @@ async def menyu(message: types.Message):
 async def menyu_inline(message: types.Message):
     await message.reply("Mahsulot", reply_markup=product_menu)
 
+@dp.message_handler(lambda message: message.text == "Back")
+async def back(message: types.Message):
+    await message.reply("Menyu", reply_markup=menu_keyboard)
+
 @dp.message_handler()
 async def echo(message: types.Message):
     await message.answer(message.text)
