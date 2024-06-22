@@ -2,6 +2,7 @@ import logging
 import os
 from aiogram import Bot, Dispatcher, executor, types
 from default_button import menu_keyboard, menu_detail_keyboard
+from inline_button import product_menu
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -24,6 +25,10 @@ async def send_welcome(message: types.Message):
 @dp.message_handler(lambda message: message.text == "Menyu")
 async def menyu(message: types.Message):
     await message.reply("Mahsulotlardan birini tanglang", reply_markup=menu_detail_keyboard)
+
+@dp.message_handler(lambda message: message.text == "Product 1")
+async def menyu_inline(message: types.Message):
+    await message.reply("Mahsulot", reply_markup=product_menu)
 
 @dp.message_handler()
 async def echo(message: types.Message):
