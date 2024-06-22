@@ -1,7 +1,7 @@
 import logging
 import os
 from aiogram import Bot, Dispatcher, executor, types
-from default_button import menu_keyboard
+from default_button import menu_keyboard, menu_detail_keyboard
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -19,6 +19,11 @@ dp = Dispatcher(bot)
 async def send_welcome(message: types.Message):
     username = message.from_user.username
     await message.reply(f"Salom @{username}", reply_markup=menu_keyboard)
+
+
+@dp.message_handler(lambda message: message.text == "Menyu")
+async def menyu(message: types.Message):
+    await message.reply("Mahsulotlardan birini tanglang", reply_markup=menu_detail_keyboard)
 
 @dp.message_handler()
 async def echo(message: types.Message):
